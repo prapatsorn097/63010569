@@ -1,4 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<conio.h>
 #include<windows.h>
@@ -11,11 +10,12 @@ void gotoxy(int x, int y)
 void draw_ship(int x, int y)
 {
 	gotoxy(x, y);
-	printf(" <-0-> ");
+	printf("<-0->");
 }
 void erase_ship(int x, int y)
 {
-	system("cls");
+	gotoxy(x, y);
+	printf("     ");
 }
 int main()
 {
@@ -28,23 +28,25 @@ int main()
 		if (_kbhit())
 		{
 			ch = _getch();
-			if (ch == 'a' && x >= 1)
+			if (ch == 'a' && x > 0)
 			{
+				erase_ship(x, y);
 				draw_ship(--x, y);
 			}
-			if (ch == 'd' && x <= 80)
+			if (ch == 'd' && x < 75)
 			{
+				erase_ship(x, y);
 				draw_ship(++x, y);
 			}
-			if (ch == 's' && y <= 23)
+			if (ch == 's' && y < 22)
 			{
 				erase_ship(x, y);
-				draw_ship(x, ++y);
+				draw_ship(x,++y);
 			}
-			if (ch == 'w' && y >= 1)
+			if (ch == 'w' && y > 0)
 			{
 				erase_ship(x, y);
-				draw_ship(x, --y);
+				draw_ship(x,--y);
 			}
 			fflush(stdin);
 		}
